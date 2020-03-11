@@ -27,7 +27,7 @@ done
 >&2 echo -e "${GREEN}Postgres data dir - ${db_data_dir}${NC}"
 >&2 echo -e "${GREEN}Postgres port - ${db_port}${NC}"
 
-If $db_data_dir doesn't exist create it.
+# If $db_data_dir doesn't exist create it.
 if [ ! -d "${db_data_dir}" ]; then
     >&2 echo -e "${GREEN}Creating '${db_data_dir}' for data.${NC}"
     mkdir -p ${db_data_dir}
