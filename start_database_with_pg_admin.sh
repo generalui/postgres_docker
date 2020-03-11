@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# The local project directory (assumes this file is in the root of the postgres_docker project).
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+>&2 echo -e "${GREEN}Current postgres_docker dir - ${DIR}${NC}"
+
 # If environment variables are set, use them. If not, use the defaults.
 pga_docker_image="${PGA_DOCKER_IMAGE:-pg-admin}"
 pg_data_dir="${PG_DATA_DIR:-$HOME/docker/volumes/postgres}"
@@ -29,7 +33,7 @@ while getopts a:d:e:i:n:p:r:s:u:w: flag; do
 done
 
 # Start the PostgreSQL server
-./create_db.sh -i ${pg_docker_image} -d ${pg_data_dir} -p ${pg_port} -u ${pg_user} -w ${pg_pw}
+${DIR}/create_db.sh -i ${pg_docker_image} -d ${pg_data_dir} -p ${pg_port} -u ${pg_user} -w ${pg_pw}
 
 # Start the pgAdmin container
-./start_pg_admin.sh -a ${pga_docker_image} -i ${pg_docker_image} -n ${pg_docker_alias} -p ${pga_port} -u ${pga_user} -w ${pga_pw}
+${DIR}/start_pg_admin.sh -a ${pga_docker_image} -i ${pg_docker_image} -n ${pg_docker_alias} -p ${pga_port} -u ${pga_user} -w ${pga_pw}
