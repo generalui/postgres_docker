@@ -29,8 +29,6 @@ done
 >&2 echo -e "${GREEN}Postgres docker image - ${pg_docker_image}${NC}"
 >&2 echo -e "${GREEN}Postgres docker alias - ${pg_docker_alias}${NC}"
 >&2 echo -e "${GREEN}pgAdmin port - ${pga_port}${NC}"
->&2 echo -e "${GREEN}pgAdmin user - ${pga_user}${NC}"
->&2 echo -e "${GREEN}pgAdmin pass - ${pga_pw}${NC}"
 
 # Ensure the docker image with the supported version of PostgreSQL has been downloaded.
 docker pull dpage/pgadmin4
