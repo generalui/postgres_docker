@@ -5,10 +5,6 @@ GREEN="\033[0;32m"
 # No Color
 NC='\033[0m'
 
-# The local project directory (assumes this file is stll in a child folder of the project).
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && cd ../ && pwd )"
->&2 echo -e "${GREEN}Current dir - ${DIR}${NC}"
-
 # If environment variables are set, use them. If not, use the defaults.
 db_data_dir="${PG_DATA_DIR:-$HOME/docker/volumes/postgres}"
 docker_image="${PG_DOCKER_IMAGE:-pg-docker}"
