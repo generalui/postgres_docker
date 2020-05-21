@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  postgres:
+    restart: always
+    image: postgres:11.5
+    container_name: ${PG_CONTAINER}
+    ports:
+      - ${PG_PORT}:5432
+    networks:
+      - ${PG_NETWORK}
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASS}
+    volumes:
+      - pgvol:/var/lib/postgresql/data
+  pgAdmin:
+    restart: always
+    image: dpage/pgadmin4
+    container_name: ${PGA_CONTAINER}
+    ports:
+      - ${PGA_PORT}:80
+    networks:
+      - ${PG_NETWORK}
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGA_USER}
+      PGADMIN_DEFAULT_PASSWORD: ${PGA_PASS}
+    volumes:
+      - pgavol:/var/lib/pgadmin
+volumes:
+  pgvol:
+  pgavol:
+
+networks:
+  postgres:
+    name: ${PG_NETWORK}

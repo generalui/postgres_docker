@@ -2,6 +2,8 @@
   "recommendations": [
     "bierner.markdown-preview-github-styles",
     "davidanson.vscode-markdownlint",
+    "formulahendry.docker-explorer",
+    "ms-azuretools.vscode-docker",
     "shardulm94.trailing-spaces"
   ]
 }
