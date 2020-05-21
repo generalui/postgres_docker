@@ -31,7 +31,4 @@ export PGA_PASS=${PGA_PASS:-pass}
 export PG_PORT=${PG_PORT:-5432}
 export PGA_PORT=${PGA_PORT:-8010}
 
->&2 echo -e "${GREEN}Network - ${PG_NETWORK}${NC}"
->&2 echo -e "${GREEN}Image - ${PG_CONTAINER}${NC}"
-
 docker-compose -f docker-compose.postgres.yml up -d
