@@ -1,5 +1,6 @@
 #!/bin/bash
 
+YELLOW="\033[1;33m"
 GREEN="\033[0;32m"
 # No Color
 NC='\033[0m'
@@ -11,10 +12,13 @@ PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # .env loading in the shell
 ENV_FILE=${PROJECT_DIR}/.env
 dotenv() {
-    if [ -f "${ENV_FILE}" ]; then
-        set -a
-        [ -f ${ENV_FILE} ] && . ${ENV_FILE}
-        set +a
+    if [ -f "${ENV_FILE}" ]
+    then
+      set -a
+      [ -f ${ENV_FILE} ] && . ${ENV_FILE}
+      set +a
+    else
+      >&2 echo -e "${YELLOW}No .env file found${NC}"
     fi
 }
 # Run dotenv
