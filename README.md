@@ -53,6 +53,14 @@ A script to readily create and run [Postgres](https://www.postgresql.org/) in [D
 
   Example usage:
 
+  The first time running (or when a rebuild is desired), pass the "build" flag - `-b build`:
+
+  ```bash
+  ./start.sh -b build
+  ```
+
+  After a build, starting the container does not require a build flag. Simply call:
+
   ```bash
   ./start.sh
   ```
