@@ -1,38 +1,43 @@
 #!/bin/bash
 
-YELLOW="\033[1;33m"
-GREEN="\033[0;32m"
-# No Color
-NC='\033[0m'
+# Set the environment variables.
+source ./set_env_variables.sh
 
-# The local scripts directory (assumes this file is in the root of the project folder).
-PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
->&2 echo -e "${GREEN}Current project dir - ${PROJECT_DIR}${NC}"
+build=false
 
-# .env loading in the shell
-ENV_FILE=${PROJECT_DIR}/.env
-dotenv() {
-    if [ -f "${ENV_FILE}" ]
+# If the `-b` flag is passed, set build to true.
+while getopts b: flag; do
+    case ${flag} in
+        b) build=true;;
+    esac
+done
+
+if [ build = true ]
+then
+    # Build and start the container.
+    docker-compose -f docker-compose.postgres.yml up -d --build
+else
+    # Start the container.
+    docker-compose -f docker-compose.postgres.yml up -d
+fi
+
+check_status() {
+    status_code=$(curl --write-out %{http_code} --silent --output /dev/null localhost:${PGA_PORT})
+    if [[ ${iterator} -lt 15 && ${status_code} -eq 200 || ${status_code} -eq 302 ]]
     then
-      set -a
-      [ -f ${ENV_FILE} ] && . ${ENV_FILE}
-      set +a
+        >&2 echo -e "${GREEN}pgAdmin is Up at localhost:${PGA_PORT}${NC}"
+        open http://localhost:${PGA_PORT}
+    elif [[ ${iterator} -eq 15 ]]
+    then
+        >&2 echo -e "${YELLOW}Did not work :(${NC}"
     else
-      >&2 echo -e "${YELLOW}No .env file found${NC}"
+        sleep 1
+        ((iterator++))
+        check_status
     fi
 }
-# Run dotenv
-dotenv
 
-# If environment variables are set, use them. If not, use the defaults.
-export PG_NETWORK=${PG_NETWORK:-postgres}
-export PG_CONTAINER=${PG_CONTAINER:-pg-docker}
-export PGA_CONTAINER=${PGA_CONTAINER:-pg-admin}
-export PG_USER=${PG_USER:-postgres}
-export PGA_USER=${PGA_USER:-mail@mail.com}
-export PG_PASS=${PG_PASS:-docker}
-export PGA_PASS=${PGA_PASS:-pass}
-export PG_PORT=${PG_PORT:-5432}
-export PGA_PORT=${PGA_PORT:-8010}
+>&2 echo -e "${GREEN}Starting pgAdmin${NC}"
 
-docker-compose -f docker-compose.postgres.yml up -d
+iterator=0
+check_status
