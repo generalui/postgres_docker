@@ -3,7 +3,7 @@ version: "3.8"
 services:
   postgres:
     restart: always
-    image: postgres:11.5
+    image: postgres:${PG_VERSION}
     container_name: ${PG_CONTAINER}
     ports:
       - ${PG_PORT}:5432

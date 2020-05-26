@@ -25,6 +25,7 @@ dotenv() {
 dotenv
 
 # If environment variables are set, use them. If not, use the defaults.
+export PG_VERSION=${PG_VERSION:-12.3}
 export PG_NETWORK=${PG_NETWORK:-postgres}
 export PG_CONTAINER=${PG_CONTAINER:-pg-docker}
 export PGA_CONTAINER=${PGA_CONTAINER:-pg-admin}

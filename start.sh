@@ -12,7 +12,7 @@ while getopts b: flag; do
     esac
 done
 
-if [ build = true ]
+if [ "${build}" = true ]
 then
     # Build and start the container.
     docker-compose -f docker-compose.postgres.yml up -d --build
