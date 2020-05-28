@@ -2,13 +2,7 @@
 
 A script to readily create and run [Postgres](https://www.postgresql.org/) in [Docker](docker.com). This also builds [pgAdmin](pgadmin.org) in docker for accessing the Postgres server.
 
-- ## `start.sh`
-
-  This creates docker containers for a postgres database and pgAdmin. The data persists across container restarts, it is stored in Docker.
-
-  Running this script without overridding any variables ([see below](#environment-variables)) should work just fine for a development environment.
-
-  ### Environment variables
+## Environment variables
 
   There are default values for the **Postgres** docker container name, the port that Postgres uses, the Postgres username, and the Postgres password. These may be overridden by setting the following environment variables:
 
@@ -54,21 +48,33 @@ A script to readily create and run [Postgres](https://www.postgresql.org/) in [D
   PGA_PORT=4242
   ```
 
+## `start.sh`
+
+  This creates docker containers for a postgres database and pgAdmin. The data persists across container restarts, it is stored in Docker.
+
+  Running this script without overridding any variables ([see above](#environment-variables)) should work just fine for a development environment.
+
   Example usage:
 
-  The first time running (or when a rebuild is desired), pass the "build" flag - `-b build`:
-
-  ```bash
-  ./start.sh -b build
-  ```
-
-  After a build, starting the container does not require a build flag. Simply call:
+  To start the containers, simply call:
 
   ```bash
   ./start.sh
   ```
 
-- ## `stop.sh`
+  If a rebuild is desired, pass the "build" flag, `--build` or simply `-b`:
+
+  ```bash
+  ./start.sh --build
+  ```
+
+  or simply
+
+  ```bash
+  ./start.sh -b
+  ```
+
+## `stop.sh`
 
   This script will stop the containers. They can be restarted with the `start.sh` script and the data will persist.
 
