@@ -12,8 +12,9 @@ services:
     environment:
       POSTGRES_USER: ${PG_USER}
       POSTGRES_PASSWORD: ${PG_PASS}
+    command: ["postgres", "-c", "log_statement=all", "-c", "log_destination=stderr"]
     volumes:
-      - pgvol:/var/lib/postgresql/data
+      - pgvol:/var/lib/postgresql/data:delegated
   pgAdmin:
     restart: always
     image: dpage/pgadmin4
@@ -26,7 +27,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: ${PGA_USER}
       PGADMIN_DEFAULT_PASSWORD: ${PGA_PASS}
     volumes:
-      - pgavol:/var/lib/pgadmin
+      - pgavol:/var/lib/pgadmin:delegated
 volumes:
   pgvol:
   pgavol:
