@@ -2,6 +2,10 @@
 
 A script to readily create and run [Postgres](https://www.postgresql.org/) in [Docker](docker.com). This also builds [pgAdmin](pgadmin.org) in docker for accessing the Postgres server.
 
+## Requirments
+
+  - [Docker Desktop](https://www.docker.com/products/docker-desktop
+
 ## Environment variables
 
   There are default values for the **Postgres** docker container name, the port that Postgres uses, the Postgres username, and the Postgres password. These may be overridden by setting the following environment variables:
