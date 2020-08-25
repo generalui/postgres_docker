@@ -4,7 +4,7 @@ A script to readily create and run [Postgres](https://www.postgresql.org/) in [D
 
 ## Requirments
 
-  - [Docker Desktop](https://www.docker.com/products/docker-desktop
+  - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
 ## Environment variables
 
