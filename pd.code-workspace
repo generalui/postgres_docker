@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"remote.containers.defaultExtensions": [
+			"bierner.markdown-preview-github-styles",
+			"davidanson.vscode-markdownlint",
+			"ms-azuretools.vscode-docker",
+			"shakram02.bash-beautify",
+			"shardulm94.trailing-spaces",
+			"streetsidesoftware.code-spell-checker"
+		],
+		"files.associations": {
+			"*.dockerignore": "ignore",
+			".env-*": "dotenv"
+		}
+	}
+}
