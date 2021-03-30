@@ -78,7 +78,7 @@ A script to readily create and run [Postgres](https://www.postgresql.org/) in [D
   ./start.sh -b
   ```
 
-  If environment variables need to be reset to defaults (with `.env` overrides), pass the "reset_env" flag, `--reset_env` or simply `-n`:
+  If environment variables need to be reset to defaults (with `.env` overrides), pass the "reset_env" flag, `--reset_env` or simply `-r`:
 
   ```bash
   ./start.sh --reset_env
@@ -87,7 +87,7 @@ A script to readily create and run [Postgres](https://www.postgresql.org/) in [D
   or simply
 
   ```bash
-  ./start.sh -n
+  ./start.sh -r
   ```
 
 ## `stop.sh`
