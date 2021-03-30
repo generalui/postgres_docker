@@ -78,6 +78,18 @@ A script to readily create and run [Postgres](https://www.postgresql.org/) in [D
   ./start.sh -b
   ```
 
+  If environment variables need to be reset to defaults (with `.env` overrides), pass the "reset_env" flag, `--reset_env` or simply `-n`:
+
+  ```bash
+  ./start.sh --reset_env
+  ```
+
+  or simply
+
+  ```bash
+  ./start.sh -n
+  ```
+
 ## `stop.sh`
 
   This script will stop the containers. They can be restarted with the `start.sh` script and the data will persist.
