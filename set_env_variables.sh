@@ -37,7 +37,7 @@ dotenv
 # Only need defaults for `DOT_ENV_FILE` and `FLASK_RUN_PORT` as they are used in the scripts.
 # All other defaults are set in the `docker-compose.yml` file.
 export DOT_ENV_FILE=${DOT_ENV_FILE:-}
-export PG_VERSION=${PG_VERSION:-12.4}
+export PG_VERSION=${PG_VERSION:-12.5}
 export PG_CONTAINER=${PG_CONTAINER:-pg-docker}
 export PG_NETWORK=${PG_NETWORK:-postgres}
 export PGA_CONTAINER=${PGA_CONTAINER:-pg-admin}
