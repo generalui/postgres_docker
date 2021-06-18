@@ -2,7 +2,7 @@
 
 A script to readily create and run [Postgres](https://www.postgresql.org/) in [Docker](docker.com). This also builds [pgAdmin](pgadmin.org) in docker for accessing the Postgres server.
 
-## Requirments
+## Requirements
 
   - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
