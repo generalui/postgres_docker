@@ -4,7 +4,7 @@ services:
   postgres:
     env_file: ${DOT_ENV_FILE:-.env-none}
     restart: always
-    image: postgres:${PG_VERSION:-12.4}-alpine
+    image: postgres:${PG_VERSION:-12.5}-alpine
     container_name: ${PG_CONTAINER:-pg-docker}
     ports:
       - ${PG_PORT:-5432}:5432
