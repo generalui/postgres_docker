@@ -16,12 +16,6 @@ NC='\033[0m'
 PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 echo -e "${BLUE}Current project dir - ${PROJECT_DIR}${NC}"
 
-DOT_ENV=.env
-DOT_ENV_FILE=${PROJECT_DIR}/${DOT_ENV}
-
-# Defaults
-PGA_PORT='8010'
-
 # By default, set these variables to false.
 build=false
 reset=false
@@ -102,12 +96,18 @@ function progress() {
     done
 }
 
+# Defaults
+PGA_PORT='8010'
+
+DOT_ENV=.env
+DOT_ENV_FILE=${PROJECT_DIR}/${DOT_ENV}
 # Set variables from the .env file
 function set_variables() {
     if [ -f "${DOT_ENV_FILE}" ]
     then
-        VAR=$(grep 'PGA_PORT' "$DOT_ENV_FILE" | xargs)
-        PGA_PORT=${VAR:-$PGA_PORT}
+        local VAR=$(grep 'PGA_PORT' "$DOT_ENV_FILE" | xargs)
+        IFS="=" read -ra VAR <<< "$VAR"
+        PGA_PORT=${VAR[1]:=$PGA_PORT}
     else
         DOT_ENV_FILE=${PROJECT_DIR}/.env-none
         >&2 echo -e "${YELLOW}Not using a ${DOT_ENV} file${NC}"
