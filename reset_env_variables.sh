@@ -6,9 +6,6 @@ GREEN="\033[0;32m"
 # No Color (used to stop or reset a color).
 NC='\033[0m'
 
-# The project directory.
-PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-
 # Unset any previously set environment variables.
 unset DOT_ENV_FILE
 unset PG_VERSION
