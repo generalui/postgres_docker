@@ -11,7 +11,7 @@ A script to readily create and run [Postgres](https://www.postgresql.org/) in [D
 There are default values for the **Postgres** docker container name, the port that Postgres uses, the Postgres username, and the Postgres password. These may be overridden by setting the following environment variables:
 
 - `PG_VERSION`\
-  The version of Postgres. (The default is `15.3`)
+  The version of Postgres. (The default is `15.4`)
 
 - `PG_CONTAINER`\
   The Postgres docker container name. (The default is `pg-docker`)
@@ -28,7 +28,7 @@ There are default values for the **Postgres** docker container name, the port th
 There are default values for the **pgAdmin** docker container, the port that pgAdmin uses, the pgAdmin username, and the pgAdmin password. These may be overridden by setting the following environment variables:
 
 - `PGA_VERSION`\
-  The version of pgAdmin. (The default is `7.3`)
+  The version of pgAdmin. (The default is `latest`)
 
 - `PGA_CONTAINER`\
   The pgAdmin docker image name. (The default is `pg-admin`)
