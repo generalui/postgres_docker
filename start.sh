@@ -21,7 +21,6 @@ DOT_ENV_FILE=${PROJECT_DIR}/${DOT_ENV}
 
 # Defaults
 PGA_PORT='8010'
-echo -e "${GREEN}Initial PGA_PORT: ${PGA_PORT}${NC}"
 
 # By default, set these variables to false.
 build=false
