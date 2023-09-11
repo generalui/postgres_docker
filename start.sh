@@ -12,6 +12,17 @@ RED="\033[1;31m"
 # No Color (used to stop or reset a color).
 NC='\033[0m'
 
+# The project directory.
+PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+echo -e "${BLUE}Current project dir - ${PROJECT_DIR}${NC}"
+
+DOT_ENV=.env
+DOT_ENV_FILE=${PROJECT_DIR}/${DOT_ENV}
+
+# Defaults
+PGA_PORT='8010'
+echo -e "${GREEN}Initial PGA_PORT: ${PGA_PORT}${NC}"
+
 # By default, set these variables to false.
 build=false
 reset=false
@@ -31,14 +42,14 @@ has_param() {
 # If the `-b or --build` flag is passed, set build to true.
 if has_param '-b' "$@" || has_param '--build' "$@"
 then
-    >&2 echo -e "${BLUE}Build requested${NC}"
+    echo -e "${BLUE}Build requested${NC}"
     build=true
 fi
 
 # If the `-r or --reset_env` flag is passed, set reset to true.
 if has_param '-r' "$@" || has_param '--reset_env' "$@"
 then
-    >&2 echo -e "${BLUE}Reset environement variables requested${NC}"
+    echo -e "${BLUE}Reset environement variables requested${NC}"
     reset=true
 fi
 
@@ -46,9 +57,6 @@ if [ "${reset}" = true ]
 then
     # Reset the environment variables.
     source ./reset_env_variables.sh
-else
-    # Set the environment variables.
-    source ./set_env_variables.sh
 fi
 
 docker system prune --force
@@ -56,15 +64,14 @@ docker system prune --force
 if [ "${build}" = true ]
 then
     # Build and start the container.
-    docker-compose -f docker-compose.postgres.yml up -d --build
+    docker compose -f docker-compose.postgres.yml up -d --build
 else
     # Start the container.
-    docker-compose -f docker-compose.postgres.yml up -d
+    docker compose -f docker-compose.postgres.yml up -d
 fi
 
 # If CTRL+C is pressed, ensure the progress background PID is stopped too.
-function ctrl_c()
-{
+function ctrl_c() {
     >&2 echo -e "${RED} => CTRL+C received, exiting${NC}"
     # Stop the progress indicator.
     kill $progress_pid
@@ -74,8 +81,7 @@ function ctrl_c()
     exit
 }
 
-function open_url()
-{
+function open_url() {
     [[ -x $BROWSER ]] && exec "$BROWSER" "$url"
     path=$(which xdg-open || which gnome-open || which open || which start) && exec "$path" "$url"
     >&2 echo -e "${YELLOW}Can't find the browser.${NC}"
@@ -97,6 +103,18 @@ function progress() {
     done
 }
 
+# Set variables from the .env file
+function set_variables() {
+    if [ -f "${DOT_ENV_FILE}" ]
+    then
+        VAR=$(grep 'PGA_PORT' "$DOT_ENV_FILE" | xargs)
+        PGA_PORT=${VAR:-$PGA_PORT}
+    else
+        DOT_ENV_FILE=${PROJECT_DIR}/.env-none
+        >&2 echo -e "${YELLOW}Not using a ${DOT_ENV} file${NC}"
+    fi
+}
+
 # Pings the server up to 35 times to see if it is available yet.
 function check_status() {
     local max_num_tries=35
@@ -108,7 +126,7 @@ function check_status() {
         wait $progress_pid 2>/dev/null
         # Cursor visible again.
         tput cnorm
-        >&2 echo -e "${GREEN}pgAdmin is Up at localhost:${PGA_PORT}${NC}"
+        echo -e "${GREEN}pgAdmin is Up at localhost:${PGA_PORT}${NC}"
         url=http://localhost:${PGA_PORT}
         open_url
     elif [[ ${iterator} -eq ${max_num_tries} ]]
@@ -126,8 +144,11 @@ function check_status() {
         check_status
     fi
 }
+
+# Run set_variables
+set_variables
 # Start the progress indicator.
->&2 echo -e "${YELLOW}* Checking if pgAdmin is Up at localhost:${PGA_PORT}${NC} ..."
+echo -e "${YELLOW}* Checking if pgAdmin is Up at localhost:${PGA_PORT}${NC} ..."
 progress &
 # Set the progress indicator's PID to a variable.
 progress_pid=$!

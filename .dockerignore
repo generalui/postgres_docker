@@ -12,6 +12,5 @@ docker-compose.yml
 git-genui.config.json
 LICENSE
 reset_env_variables.sh
-set_env_variables.sh
 start.sh
 stop.sh

@@ -55,13 +55,18 @@ PG_NETWORK=my_different_network
 PGA_PORT=4242
 ```
 
-([`.env-sample`](./.env-sample) may be used as a template)
+[`.env-sample`](./.env-sample) may be used as a template.
+Simply run:
+
+```sh
+cp .env-sample .env
+```
 
 ## `start.sh`
 
 This creates docker containers for a postgres database and pgAdmin. The data persists across container restarts, it is stored in Docker.
 
-Running this script without overridding any variables ([see above](#environment-variables)) should work just fine for a development environment.
+Running this script without overriding any variables ([see above](#environment-variables)) should work just fine for a development environment.
 
 Example usage:
 
