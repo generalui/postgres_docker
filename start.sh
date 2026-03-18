@@ -91,7 +91,7 @@ function start() {
         # Cursor invisible
         tput civis
         while sleep 0.1; do
-            i=$(((i + $charwidth) % ${#char}))
+            i=$(((i + charwidth) % ${#char}))
             printf "%s" "${char:$i:$charwidth}"
             echo -en "\033[1D"
         done
@@ -120,7 +120,7 @@ function start() {
     function check_status() {
         local max_num_tries=35
         local status_code
-        status_code=$(curl --write-out %{http_code} --silent --output /dev/null localhost:"${pga_port}")
+        status_code=$(curl --write-out '%{http_code}' --silent --output /dev/null localhost:"${pga_port}")
         if [[ ${iterator} -lt ${max_num_tries} && ${status_code} -eq 200 || ${status_code} -eq 302 ]]
         then
             # Stop the progress indicator.
@@ -140,7 +140,7 @@ function start() {
             tput cnorm
             >&2 echo -e "${yellow}Did not work. Perhaps the server is taking a long time to start?${nc}"
         else
-            echo -en "${chars:$iterator:1}" "\r"
+            echo -en "${char:$iterator:1}" "\r"
             sleep 1
             ((iterator++))
             check_status

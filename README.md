@@ -118,3 +118,7 @@ Example usage:
 ### Linting
 
 See [LINTING.md](./documentation/LINTING.md)
+
+## Other Documentation
+
+See [documentation](./documentation/)
