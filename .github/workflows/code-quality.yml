@@ -1,0 +1,71 @@
+name: Code Quality
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, reopened, synchronize]
+    paths:
+      - '**/*.md'
+      - '**/.markdownlint*'
+      - '*.sh'
+      - '.github/workflows/code-quality.yml'
+  workflow_dispatch:
+jobs:
+  quality:
+    name: Lint and test
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          submodules: false
+
+      - name: Get changed markdown files
+        id: changed_md
+        uses: tj-actions/changed-files@v47
+        with:
+          files: |
+            **/*.md
+
+      - name: Get changed shell scripts
+        id: changed_sh
+        uses: tj-actions/changed-files@v47
+        with:
+          files: |
+            *.sh
+
+      - name: Should lint docs
+        id: should_lint_docs
+        shell: bash
+        run: |
+          run=${{ steps.changed_md.outputs.any_changed }}
+          echo "run=${run}" >> $GITHUB_OUTPUT
+
+      - name: Should lint shell
+        id: should_lint_shell
+        shell: bash
+        run: |
+          run=${{ steps.changed_sh.outputs.any_changed }}
+          echo "run=${run}" >> $GITHUB_OUTPUT
+
+      - name: Lint markdown
+        if: steps.should_lint_docs.outputs.run == 'true'
+        uses: DavidAnson/markdownlint-cli2-action@v22
+        with:
+          globs: '**/*.md'
+
+      - name: Lint shell scripts
+        if: steps.should_lint_shell.outputs.run == 'true'
+        uses: reviewdog/action-shellcheck@v1
+        with:
+          reporter: github-pr-review
+          fail_on_error: true
+          path: '.'
+          pattern: '*.sh'
+          exclude: './.git/*'
+
+      - name: Default Job Success
+        if: steps.should_lint_docs.outputs.run != 'true' && steps.should_lint_shell.outputs.run != 'true'
+        shell: bash
+        run: exit 0
