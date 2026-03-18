@@ -1,23 +1,32 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {
-		"remote.containers.defaultExtensions": [
-			"bierner.markdown-preview-github-styles",
-			"davidanson.vscode-markdownlint",
-			"ms-azuretools.vscode-docker",
-			"shakram02.bash-beautify",
-			"shardulm94.trailing-spaces",
-			"socheatsok78-lab.dotenv-vscode-stripped",
-			"streetsidesoftware.code-spell-checker"
-		],
-		"files.associations": {
-			"*.dockerignore": "ignore",
-			".env-*": "dotenv"
-		},
-		"dotenv.enableAutocloaking": false
-	}
+  "folders": [
+    {
+      "path": ".",
+    },
+  ],
+  "settings": {
+    "cSpell.enableFiletypes": ["dockercompose", "dockerfile"],
+    "editor.formatOnSave": true,
+    "editor.wordWrap": "on",
+    "files.associations": {
+      ".cursorrules": "plaintext",
+      "*.dockerignore": "ignore",
+      ".env.*": "dotenv",
+      ".env-*": "dotenv",
+      "Dockerfile-*": "dockerfile",
+      "*.code-workspace": "json",
+    },
+    "dotenv.enableAutocloaking": false,
+    "files.eol": "\n",
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[markdown]": {
+      "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
+    },
+    "workbench.editor.highlightModifiedTabs": true,
+  },
 }

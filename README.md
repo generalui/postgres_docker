@@ -1,6 +1,6 @@
 # Postgres/Docker Accelerator
 
-A script to readily create and run [Postgres](https://www.postgresql.org/) in [Docker](docker.com). This also builds [pgAdmin](pgadmin.org) in docker for accessing the Postgres server.
+A script to readily create and run [Postgres](https://www.postgresql.org/) in [Docker](https://www.docker.com). This also builds [pgAdmin](https://www.pgadmin.org) in docker for accessing the Postgres server.
 
 ## Requirements
 
@@ -11,7 +11,7 @@ A script to readily create and run [Postgres](https://www.postgresql.org/) in [D
 There are default values for the **Postgres** docker container name, the port that Postgres uses, the Postgres username, and the Postgres password. These may be overridden by setting the following environment variables:
 
 - `PG_VERSION`\
-  The version of Postgres. (The default is `15.4`)
+  The version of Postgres. (The default is `18.3`)
 
 - `PG_CONTAINER`\
   The Postgres docker container name. (The default is `pg-docker`)
@@ -42,10 +42,13 @@ There are default values for the **pgAdmin** docker container, the port that pgA
 - `PGA_PASS`\
   The pgAdmin password. (The default is `pass`. This should be fine for development, but PLEASE use best practices and change for any deployment.)
 
-Once created these containers may be accessed via a network. The default network i called `postgres`. This may be overridden by setting the following environment variable:
+Once created these containers may be accessed via a network. The default network is called `postgres`. This may be overridden by setting the following environment variable:
 
 - `PG_NETWORK`\
   The network the containers can be reached on. (The default is `postgres`)
+
+- `DOT_ENV_FILE`\
+  The path to the `.env` file passed to Docker Compose. (The default is `.env`, falling back to `.env-none` when absent)
 
 A `.env` file may be placed in the same folder as this script to set environment variables. An example of the content of the `.env` may look like:
 
@@ -109,3 +112,9 @@ Example usage:
 ```bash
 ./stop.sh
 ```
+
+## Contributing
+
+### Linting
+
+See [LINTING.md](./documentation/LINTING.md)

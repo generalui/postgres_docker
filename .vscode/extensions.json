@@ -1,11 +1,12 @@
 {
   "recommendations": [
     "bierner.markdown-preview-github-styles",
+    "esbenp.prettier-vscode",
     "davidanson.vscode-markdownlint",
     "ms-azuretools.vscode-docker",
-    "shakram02.bash-beautify",
     "shardulm94.trailing-spaces",
     "socheatsok78-lab.dotenv-vscode-stripped",
-    "streetsidesoftware.code-spell-checker"
+    "streetsidesoftware.code-spell-checker",
+    "timonwong.shellcheck"
   ]
 }
