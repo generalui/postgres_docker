@@ -1,0 +1,17 @@
+{
+  "config": {
+    "default": true,
+    "line-length": {
+      "line_length": 240
+    },
+    "no-inline-html": {
+      "allowed_elements": ["a", "img", "p"]
+    },
+  },
+  "gitignore": true,
+  "ignores": [
+    ".github/copilot-instructions.md",
+    "**/CLAUDE.md",
+    "**/.cursorrules"
+  ]
+}
